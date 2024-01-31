@@ -1,0 +1,339 @@
+
+{% extends 'base.html' %}
+{% load static %}
+{% load arabic_indic %}
+{% block content %}
+{% comment %} {{supposed_paid_month|arabic_indic}} {% endcomment %}
+
+
+
+<style>
+    body{
+        color:black !important;
+        margin-bottom:20px;
+    }
+    .page-header {
+        margin: 0 0 1rem;
+    }
+  
+    .brc-default-l1 {
+        border-color: black !important;
+    }
+  
+    .text-grey-m2 {
+        color: black !important;
+    }
+  
+    .pb-25, .py-25 {
+        padding: .5rem!important;
+    }
+  
+    .bgc-default-tp1 {
+        background-color: #497d85!important;
+    }
+    .bgm {
+        background-color: #d87606!important;
+    }
+    .bgc-default-l4, .bgc-h-default-l4:hover {
+        background-color: #f3f8fa!important;
+    }
+    .btn-light {
+        color: #757984;
+        background-color: #a8b0c9;
+        border-color: #dddfe4;
+    }
+  
+    a {
+        text-decoration: none;
+    }
+  </style>
+  
+  
+  <style>
+        body{
+        margin-top:5px;
+        color: #1c5cda;
+    }
+    
+
+    .page-header {
+        margin: 0 0 1rem;
+    }
+    
+    .brc-default-l1 {
+        border-color: black !important;
+    }
+    
+    .text-grey-m2 {
+        color: black !important;
+    }
+    
+    .pb-25, .py-25 {
+        padding: .5rem!important;
+    }
+    
+    .bgc-default-tp1 {
+        background-color: #497d85!important;
+    }
+    .bgc-default-l4, .bgc-h-default-l4:hover {
+        background-color: #f3f8fa!important;
+    }
+    .btn-light {
+        color: #757984;
+        background-color: #a8b0c9;
+        border-color: #dddfe4;
+    }
+    
+    .width_cust{
+        max-width: 40%;
+    }
+    .box {
+        display: block;
+    }
+    .bold_text{
+      font-size: 20px;
+      font-weight: bold;
+      }
+    .title_text_color{
+      color: #f9b96e;
+      }
+    .normal_text_color{
+      color: black;
+      }
+  
+      .square-div {
+        width: 98%;
+        height: 60px;
+        border: 2px solid black;
+        border-radius: 10px;
+        position: relative;
+        margin-bottom:5px;
+        margin-right:5px;
+    }
+    .label-span {
+        position: absolute;
+        top: 0;
+        right: 0;
+        color: #ffc107;
+        font-weight:bold;
+        padding: 2px 5px;
+    }
+
+    @media print {
+        /* Hide the print button when printing */
+        .action-buttons {
+            display: none;
+        }
+        .back {
+            display: none;
+        }
+        .page-header {
+            margin: 0 0 0rem;
+        }
+        .title_text_color{
+            color: black;
+        }
+        .container {
+            margin: 1 0 0rem;
+        }
+        
+    }
+  </style>
+  
+  
+      <div class="page-content container">
+          <div class="page-header text-blue-d2">
+              <div class="page-tools">
+                  <div class="row action-buttons">
+
+                      <div class="col-3 align-self-start d-sm-flex justify-content-start">
+                          <button class="btn bg-black btn-light mx-1px print-button" onclick="printPage()" data-title="Print">
+                              طباعة
+                          </button>
+                          <button class="btn bg-black btn-light mx-1px print-button" id="download" >
+                              تحميل
+                          </button>
+                          <a class="btn bg-black btn-light mx-1px back" style="text-align:center;" href="{% url 'admin:index' %}">
+                              رجوع
+                          </a>
+                      </div>
+
+                  </div>
+                  
+                  
+              </div>
+          </div>
+      </div>
+  <div id="print">
+    <div class="container " >
+        <div class="row invoice ">
+            <div class="col-12 col-lg-12 ">
+
+                <div class="row py-5" style="background-color: #10626F; ">
+                    <div class="col d-flex justify-content-center">
+                        <div>
+                            <!-- Adjust the width and height as needed -->
+                            {% comment %} <img src="{{ logo_url }}" alt=""  style="max-width: 200px; max-height: 100px;"> {% endcomment %}
+                            <img src="{{ logo_url }}" alt=""  >
+                            {% if companyinfo.phone_number %}
+                            <div class="my-2 d-flex justify-content-center">
+                                <span class="text-600 mx-3 bold_text" style="color:#d59653;"><i class="fa-solid fa-phone-flip"></i></span> 
+                                <span class="text-600 bold_text" style="color:black;">{{companyinfo.phone_number}}</span> 
+                            </div>
+                            {% endif %}
+                        </div>
+
+                    </div>
+                </div>
+                <div class="row text-black bgm py-25 bold_text " >
+                    <span style="text-align:center">معلومات السيارة</span>
+                </div>
+                <div class="row" style="background-color: #10626F;">
+
+                    <div class="col d-sm-flex justify-content-center">
+                        <hr class="d-sm-none" />
+                        <div class="text-grey-m2">
+
+                            <table class="table">
+                                <tbody>
+                                    {% if car.category %}
+                                  <tr>
+                                    <th scope="row"><i class="fa fa-circle text-blue-m2 text-xs mr-1"></th>
+                                    <td><span class = "bold_text title_text_color mx-4">نــوع السيارة:</span></td>
+                                    <td><span class = "bold_text normal_text_color" >{{car.category.name}}</span> </td>
+                                  </tr>
+                                  {% endif %}
+                                    {% if car.code %}
+                                  <tr>
+                                    <th scope="row"><i class="fa fa-circle text-blue-m2 text-xs mr-1"></th>
+                                    <td><span class = "bold_text title_text_color mx-4">كود السيارة:</span></td>
+                                    <td><span class = "bold_text normal_text_color" >{{car.code}}</span> </td>
+                                  </tr>
+                                  {% endif %}
+                                  {% if car.manufacture_year %}
+                                  <tr>
+                                    
+                                    <th scope="row"><i class="fa fa-circle text-blue-m2 text-xs mr-1"></th>
+                                    <td><span class = "bold_text title_text_color mx-4">سنــة الصنع:</span> </td>
+                                    <td><span class = "bold_text normal_text_color" >{{car.manufacture_year}}</span> </td>
+                                  </tr>
+                                  {% endif %}
+                                  {% if car.color %}
+                                  <tr>
+                                    
+                                    <th scope="row"><i class="fa fa-circle text-blue-m2 text-xs mr-1"></th>
+                                    <td><span class = "bold_text title_text_color mx-4"> اللــــــــــــــــون:</span>  </td>
+                                    <td><span class = "bold_text normal_text_color" >{{car.color}}</span>  </td>
+                                  </tr>
+                                  {% endif %}
+                                  {% if car.government %}
+                                  <tr>
+                                    
+                                    <th scope="row"><i class="fa fa-circle text-blue-m2 text-xs mr-1"></th>
+                                    <td><span class = "bold_text title_text_color mx-4"> المحــــافـظة:</span>   </td>
+                                    <td><span class = "bold_text normal_text_color" >{{car.get_government_display}}</span>  </td>
+                                  </tr>
+                                  {% endif %}
+                                  <tr>
+                                    
+
+                                  
+                                </tbody>
+                            </table>
+
+                        </div>
+                    </div>
+                    <div class="col d-sm-flex justify-content-center">
+                        <hr class="d-sm-none" />
+                        <div class="text-grey-m2">
+                            <table class="table">
+                                <tbody>
+                                    {% if car.traffic %}
+                                  <tr>
+                                    <th scope="row"><i class="fa fa-circle text-blue-m2 text-xs mr-1"></th>
+                                    <td><span class = "bold_text title_text_color mx-4"> الــمـــــــــــرور:</span>   </td>
+                                    <td><span class = "bold_text normal_text_color" >{{car.traffic}}</span>  </td>
+                                  </tr>
+                                  {% endif %}
+                                    {% if car.gawap_type %}
+                                  <tr>
+                                    <th scope="row"><i class="fa fa-circle text-blue-m2 text-xs mr-1"></th>
+                                    <td><span class = "bold_text title_text_color mx-4">نوع الجواب:</span>   </td>
+                                    <td><span class = "bold_text normal_text_color" >{{car.get_gawap_type_display}}</span> </td>
+                                  </tr>
+                                  {% endif %}
+                                  {% if car.garunty %}
+                                  <tr>
+                                    <th scope="row"><i class="fa fa-circle text-blue-m2 text-xs mr-1"></th>
+                                    <td><span class = "bold_text title_text_color mx-4"> الضمــــــــان:</span>    </td>
+                                    <td><span class = "bold_text normal_text_color" >{{car.get_garunty_display}}</span>  </td>
+                                  </tr>
+                                  {% endif %}
+                                  {% if car.name %}
+                                  <tr>
+                                    <th scope="row"><i class="fa fa-circle text-blue-m2 text-xs mr-1"></th>
+                                    <td><span class = "bold_text title_text_color mx-4"> اسم المعاق:</span>    </td>
+                                    <td><span class = "bold_text normal_text_color" >{{car.name}}</span>  </td>
+                                  </tr>
+                                  {% endif %}
+                                  {% if car.phone_number %}
+                                  <tr>
+                                    <th scope="row"><i class="fa fa-circle text-blue-m2 text-xs mr-1"></th>
+                                    <td><span class = "bold_text title_text_color mx-4"> تليفون المعاق:</span>    </td>
+                                    <td><span class = "bold_text normal_text_color" >{{car.phone_number}}</span>  </td>
+                                  </tr>
+                                  {% endif %}
+                                  
+                                </tbody>
+                            </table>
+
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+  </div>
+      
+  <script>
+      function printPage() {
+      
+          // Create a link element for the print stylesheet
+          var style = document.createElement('link');
+          style.type = 'text/css';
+          style.rel = 'stylesheet';
+          style.href = 'path/to/print-styles.css'; // Replace with the actual path to your print stylesheet
+      
+          // Append the link element to the head of the document
+          document.head.appendChild(style);
+      
+          // Trigger the print dialog
+          window.print();
+      
+          // Remove the added print stylesheet after printing
+          style.parentNode.removeChild(style);
+      }
+      
+  </script>
+  
+
+
+<script>
+    document.getElementById('download').addEventListener('click', function() {
+        domtoimage.toPng(document.getElementById('print'))
+            .then(function (dataUrl) {
+                var a = document.createElement('a');
+                a.href = dataUrl;
+                a.download = '{{car.category.name}}_{{car.manufacture_year}}{{car.color}}.png';
+                a.click();
+            })
+            .catch(function (error) {
+                console.error('oops, something went wrong!', error);
+            });
+    });
+</script>
+
+
+{% endblock content %} 

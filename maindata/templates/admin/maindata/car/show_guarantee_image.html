@@ -1,0 +1,28 @@
+
+
+
+
+<a class="button rounded " data-bs-toggle="modal" data-bs-target="#carreport-{{ car_id }}">  عرض </a>
+<a class="button rounded " href = '{{ garunty_file_url }}' download>  تحميل </a>
+
+<div class="modal "  id="carreport-{{ car_id }}" tabindex="-1" aria-labelledby="carreportLabel-{{ car_id }}" aria-hidden="false">
+    <div class="modal-dialog  modal-xl" >
+        <div class="modal-content">
+            <div class="modal-header" dir="ltr">
+                <h5 class="modal-title" id="carreportLabel-{{ car_id }}">   صورة الضمان</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            
+            <div class="modal-body" >
+                
+                <div>
+                    <!-- Adjust the width and height as needed -->
+                    {% if garunty_file_url %}
+                    <img src="{{ garunty_file_url }}" alt=""  >
+                    {% endif %}
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
