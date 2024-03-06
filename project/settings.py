@@ -14,9 +14,9 @@ SECRET_KEY = 'django-insecure-dbpx)!#%s!#n^&&r^e0!t&ot$vit@t8++_=1*)#84ym)j-v@(w
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['*','192.168.1.5','127.0.0.1','basimyounis.com']
+#ALLOWED_HOSTS = ['*','192.168.1.5','127.0.0.1','basimyounis.com']
 
-
+ALLOWED_HOSTS = ['*','localhost']
 # Application definition
 
 INSTALLED_APPS = [
@@ -30,7 +30,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'maindata',
     'companyinfo',
-    'rangefilter',
+    #'rangefilter',
     # 'rangefilter',
     # 'corsheaders',
     # "django_extensions",
@@ -54,12 +54,12 @@ MIDDLEWARE = [
 ROOT_URLCONF = 'project.urls'
 
 CORS_ALLOW_ALL_ORIGINS = False
-CORS_ALLOWED_ORIGINS = [
-    'http://192.168.1.5',  
-    'http://127.0.0.1',  
-    'https://basimyounis.com',  
-    'https://9e67-41-235-117-105.ngrok-free.app',  
-]
+# CORS_ALLOWED_ORIGINS = [
+#     'http://192.168.1.5',  
+#     'http://127.0.0.1',  
+#     'https://basimyounis.com',  
+#     'https://9e67-41-235-117-105.ngrok-free.app',  
+# ]
 
 
 
@@ -141,6 +141,7 @@ USE_TZ = True
 
 
 import os
+STATIC_ROOT = BASE_DIR / "static"
 STATIC_URL = '/static/'
 STATICFILES_DIRS = [
     BASE_DIR / "static",
@@ -150,8 +151,8 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 
-CSRF_TRUSTED_ORIGINS = ['http://192.168.1.5/','http://127.0.0.1/','https://9e67-41-235-117-105.ngrok-free.app']
-SECURE_CROSS_ORIGIN_OPENER_POLICY = ['http://192.168.1.5/','http://127.0.0.1/','https://9e67-41-235-117-105.ngrok-free.app']
+#CSRF_TRUSTED_ORIGINS = ['http://192.168.1.5/','http://127.0.0.1/','https://9e67-41-235-117-105.ngrok-free.app']
+#SECURE_CROSS_ORIGIN_OPENER_POLICY = ['http://192.168.1.5/','http://127.0.0.1/','https://9e67-41-235-117-105.ngrok-free.app']
 
 ###############################################################################
 # handel apps and models display

@@ -54,7 +54,7 @@ class CarAdmin(admin.ModelAdmin):
         if obj.garunty_file:
             garunty_file = obj.garunty_file
             garunty_file_url = garunty_file.url
-        modal_html = render_to_string('admin/maindata/car/show_guarantee_image.html', {
+        modal_html = render_to_string('admin/maindata/Car/show_guarantee_image.html', {
             'garunty_file_url' : garunty_file_url,
         })
         return format_html(modal_html)

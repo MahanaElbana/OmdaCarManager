@@ -1,0 +1,5 @@
+dj-database-url
+Django
+django-admin-interface
+psycopg2-binary
+gunicorn
